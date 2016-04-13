@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,6 +104,13 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_logout) {
+            SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.clear();
+            editor.putBoolean(Constants.loggedIn, false);
+            editor.commit();
+            goToLoginActivity();
         }
 
         return super.onOptionsItemSelected(item);
@@ -126,8 +132,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_delivery) {
             goToDeliveryOrderActivity();
-        } else if (id == R.id.nav_incoming) {
-
         } else if (id == R.id.nav_shelf) {
             // get prompt.xml view
             LayoutInflater li = LayoutInflater.from(this);
@@ -188,7 +192,7 @@ public class MainActivity extends AppCompatActivity
             // show it
             alertDialog.show();
         } else if (id == R.id.nav_reporting) {
-
+            goToReportingActivity();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -196,8 +200,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void goToReportingActivity() {
+        Intent intent = new Intent(this, ReportingActivity.class);
+        startActivity(intent);
+    }
     private void goToPurchaseOrderActivity() {
-        Intent intent = new Intent(this, PurchaseOrderActivity.class);
+        Intent intent = new Intent(this, ListPurchaseOrderActivity.class);
         startActivity(intent);
     }
 

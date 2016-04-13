@@ -2,7 +2,9 @@ package com.easytech.smartstaffapp;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.easytech.smartstaffapp.pojo.Employee;
+import com.google.gson.Gson;
 
 public class StartActivity extends Activity {
 
@@ -44,7 +48,12 @@ public class StartActivity extends Activity {
             @Override
             public void onFinish() {
                 progressBar.setProgress(100);
-                goToLoginActivity();
+                SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+                String employeeJson = sharedpreferences.getString(Constants.Customer, "");
+                Gson gson = new Gson();
+                Employee employee = gson.fromJson(employeeJson, Employee.class);
+                if(employee == null || employee.toString() == null) goToLoginActivity();
+                else goToMainActivity();
             }
         };
 
@@ -56,6 +65,9 @@ public class StartActivity extends Activity {
         startActivity(intent);
     }
 
-
+    public void goToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
 

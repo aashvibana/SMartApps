@@ -11,6 +11,8 @@ public class Constants {
     public static final String itemList = "itemList";
     public static final String item = "itemInfo";
 
+    public static final String dateFormat = "dd/MM/yyyy";
+
     private static final String ipAddress = "172.25.96.243";
     public static final String urlString = "http://" + ipAddress + ":8080/SMart-war/mobile/";
 

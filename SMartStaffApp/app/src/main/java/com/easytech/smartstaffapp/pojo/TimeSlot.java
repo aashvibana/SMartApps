@@ -1,20 +1,32 @@
 package com.easytech.smartstaffapp.pojo;
 
+import java.util.List;
+
 /**
  * Created by Bana on 13/4/16.
  */
 public class TimeSlot {
 
-    private Long Id;
+    private Long id;
     private String deliveryScheduleDate;
     private int timeSlotNum;
 
+    private List<DeliveryOrder> deliveryOrders;
+
+    public List<DeliveryOrder> getDeliveryOrders() {
+        return deliveryOrders;
+    }
+
+    public void setDeliveryOrders(List<DeliveryOrder> deliveryOrders) {
+        this.deliveryOrders = deliveryOrders;
+    }
+
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getDeliveryScheduleDate() {
@@ -36,7 +48,7 @@ public class TimeSlot {
     @Override
     public String toString() {
         return "TimeSlot{" +
-                "Id=" + Id +
+                "id=" + id +
                 ", deliveryScheduleDate='" + deliveryScheduleDate + '\'' +
                 ", timeSlotNum=" + timeSlotNum +
                 '}';

@@ -23,6 +23,33 @@ public class Employee implements Serializable {
     private String jobTitle;
 
     private Long warehouseId;
+    private String driverLicenseNum;
+    private String vehiclePlateNum;
+    private Long storeId;
+
+    public String getDriverLicenseNum() {
+        return driverLicenseNum;
+    }
+
+    public void setDriverLicenseNum(String driverLicenseNum) {
+        this.driverLicenseNum = driverLicenseNum;
+    }
+
+    public String getVehiclePlateNum() {
+        return vehiclePlateNum;
+    }
+
+    public void setVehiclePlateNum(String vehiclePlateNum) {
+        this.vehiclePlateNum = vehiclePlateNum;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
 
     public Long getWarehouseId() {
         return warehouseId;

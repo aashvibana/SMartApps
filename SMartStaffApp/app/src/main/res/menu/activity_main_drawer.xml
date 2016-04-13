@@ -18,7 +18,7 @@
     </group>
 
     <item
-        android:title="Transport">
+        android:title="Store &amp; Transport">
         <menu>
             <item
                 android:id="@+id/nav_transport"
@@ -28,16 +28,7 @@
                 android:id="@+id/nav_delivery"
                 android:icon="@android:drawable/ic_menu_gallery"
                 android:title="Delivery Orders" />
-        </menu>
-    </item>
 
-    <item
-        android:title="Store Management">
-        <menu>
-            <item
-                android:id="@+id/nav_incoming"
-                android:icon="@android:drawable/ic_menu_share"
-                android:title="Incoming Orders" />
             <item
                 android:id="@+id/nav_shelf"
                 android:icon="@android:drawable/ic_menu_gallery"

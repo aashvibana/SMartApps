@@ -15,6 +15,9 @@ public class Item implements Serializable {
     private double itemPrice;
     private String itemImage;
 
+    private int quantity;
+    private String warehouse;
+
     public Item(String itemUpc, String category, String subCategory, String itemName, String itemDesc, double itemPrice, String itemImage) {
         this.itemUpc = itemUpc;
         this.category = category;
@@ -23,6 +26,22 @@ public class Item implements Serializable {
         this.itemDesc = itemDesc;
         this.itemPrice = itemPrice;
         this.itemImage = itemImage;
+    }
+
+    public String getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(String warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getItemUpc() {

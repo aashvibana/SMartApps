@@ -41,6 +41,16 @@
             android:noHistory="true" >
         </activity>
         <activity
+            android:name=".SearchItemActivity"
+            android:label="Search Items by UPC/Keyword" />
+        <activity
+            android:name=".ItemListActivity"
+            android:label="Your Results" />
+        <activity
+            android:name=".ItemDetailsActivity"
+            android:label="Item Details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -51,7 +61,7 @@
             android:noHistory="true" >
         </activity>
         <activity
-            android:name=".PurchaseOrderActivity"
+            android:name=".ListPurchaseOrderActivity"
             android:label="@string/title_activity_purchase_order" >
         </activity>
         <activity
@@ -62,7 +72,9 @@
             android:name=".PickListActivity"
             android:label="@string/title_activity_pick_list" >
         </activity>
-        <activity android:name=".ListPickListActivity" >
+        <activity
+            android:name=".ListPickListActivity"
+            android:label="Current Picking Lists" >
         </activity>
         <activity
             android:name=".PickListDetailsActivity"
@@ -73,6 +85,17 @@
             android:name=".DeliveryOrderDetailsActivity"
             android:label="@string/title_activity_delivery_order_details"
             android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ReportingActivity"
+            android:label="S-Mart Reports" >
+        </activity>
+        <activity
+            android:name=".PurchaseOrderDetailsActivity"
+            android:label="@string/title_activity_purchase_order_details"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".TransportScheduleActivity" >
         </activity>
     </application>
 

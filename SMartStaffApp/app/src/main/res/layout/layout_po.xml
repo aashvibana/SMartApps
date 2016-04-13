@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:padding="8dip">
+
+
+    <TextView
+        android:id="@+id/po_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Example application"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/po_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="Description"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/po_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="22/12/1994" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/po_type"
+        android:text=""/>
+
+</LinearLayout>

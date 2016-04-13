@@ -59,6 +59,9 @@ public class DeliveryOrderAdapter extends BaseAdapter {
         final DeliveryOrder curDO = mDeliveryOrder.get(position);
 
         deliveryOrder.DeliveryOrderId.setText(String.valueOf(curDO.getId()));
+
+
+
         if(curDO.getDeliveryTimeSlot().getTimeSlotNum() != 0)
             deliveryOrder.DeliveryOrderDateTime.setText(String.valueOf(curDO.getDeliveryDate() +", " + curDO.getDeliveryTimeSlot().getTimeSlotNum()));
         else

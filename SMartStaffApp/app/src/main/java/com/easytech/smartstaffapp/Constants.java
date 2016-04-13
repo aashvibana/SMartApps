@@ -13,10 +13,15 @@ public class Constants {
     public static final String pickList = "pickList";
     public static final String pick = "pickListInfo";
     public static final String delivery = "deliveryOrderInfo";
+    public static final String purchase = "purchaseOrderInfo";
 
     public static final String success = "success";
 
+    public static final String dateFormat = "dd/MM/yyyy";
+
     private static final String ipAddress = "172.25.96.243";
+
+    public static final String reportString = "http://" + ipAddress + ":8080/SMart-war/store/PerformReportManagement/reportView.jsp";
     public static final String urlString = "http://" + ipAddress + ":8080/SMart-war/mobile/";
 
     /**

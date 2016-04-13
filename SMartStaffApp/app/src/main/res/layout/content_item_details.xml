@@ -62,7 +62,8 @@
                     android:layout_height="wrap_content"
                     android:text="Name" />
 
-                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/card_view2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,6 +72,29 @@
 
                     <TextView
                         android:id="@+id/item_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textStyle="bold" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item Warehouse Location"/>
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    card_view:cardCornerRadius="4dp">
+
+                    <TextView
+                        android:id="@+id/item_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.easytech.smartstaffapp.PurchaseOrderDetailsActivity"
+    tools:showIn="@layout/activity_purchase_order_details">
+
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/do_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/po_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/po_list_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/po_id"
+                android:layout_width="fill_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Purchase Order Id"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/po_title"
+                android:layout_width="fill_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Purchase Order Title"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/po_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dip"
+                android:gravity="center"
+                android:text="Purchase Order Description"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Approval Date : " />
+
+                <TextView
+                    android:id="@+id/po_approvaldate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Approval Date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Approver : " />
+
+                <TextView
+                    android:id="@+id/po_approver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Approver" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Amount : " />
+
+                <TextView
+                    android:id="@+id/po_amt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Amount" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Next Run Date : " />
+
+
+                <TextView
+                    android:id="@+id/po_nextrundate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Next Run Date" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Delivery Date : " />
+
+                <TextView
+                    android:id="@+id/po_deliverydate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Delivery Date" />
+
+            </LinearLayout>
+
+
+            <ListView
+                android:id="@+id/po_items"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

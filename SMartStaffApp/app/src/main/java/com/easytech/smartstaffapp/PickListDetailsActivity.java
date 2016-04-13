@@ -151,7 +151,6 @@ public class PickListDetailsActivity extends AppCompatActivity {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BarcodeScannerActivity.BarcodeObject);
                     Toast.makeText(PickListDetailsActivity.this, R.string.barcode_success, Toast.LENGTH_SHORT).show();
-                    //TODO remove picked item from Picking list
                     for(Item item : pickingList.getItems()) {
                         if(item.getItemUpc().equalsIgnoreCase(barcode.displayValue))
                             pickingList.getItems().remove(item);

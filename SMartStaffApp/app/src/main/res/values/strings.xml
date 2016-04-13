@@ -28,7 +28,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_purchase_order">Purchase Order</string>
+    <string name="title_activity_purchase_order">Purchase Orders List</string>
     <string name="purchase_order_id">Purchase Order Id</string>
     <string name="delivery_order_id">Delivery Order Id</string>
     <string name="pick_list_id">Picking List Id</string>
@@ -50,10 +50,11 @@
     <string name="item_search">Search Item</string>
 
     <string name="submit">Submit</string>
-    <string name="title_activity_delivery_order">Delivery Order</string>
+    <string name="title_activity_delivery_order">Delivery Orders List</string>
     <string name="title_activity_pick_list">Picking List</string>
-    <string name="title_activity_list_details">ListDetailsActivity</string>
-    <string name="title_activity_delivery_order_details">DeliveryOrderDetailsActivity</string>
+    <string name="title_activity_list_details">Picking List Details</string>
+    <string name="title_activity_delivery_order_details">Delivery Order Details</string>
+    <string name="title_activity_purchase_order_details">Purchase Order Details</string>
 
 
 </resources>
