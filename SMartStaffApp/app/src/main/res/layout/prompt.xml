@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal" >
+
+        <!-- This is for the info image -->
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dip"
+            android:src="@drawable/ic_action_info" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvmessagedialogtitle"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dip"
+            android:layout_weight="0.01"
+            android:padding="8dp"
+            android:text="Alert Empty Shelf"
+            android:textColor="#343434"
+            android:textSize="16dip"
+            android:textStyle="normal"
+            android:typeface="normal" />
+    </LinearLayout>
+
+    !-- Underline with this bluish color -->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#09adb9" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/empty_shelf_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_action_box"
+            android:hint="Empty Shelf Id">
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/empty_shelf_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Store Staff Remarks"
+            android:drawableStart="@drawable/ic_action_document"/>
+    </LinearLayout>
+</LinearLayout>

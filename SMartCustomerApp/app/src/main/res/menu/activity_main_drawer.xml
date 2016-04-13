@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Mobile Scan &amp; Go" />
+        <item android:id="@+id/nav_item"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Search Item" />
+        <item android:id="@+id/nav_location"
+            android:icon="@android:drawable/ic_menu_directions"
+            android:title="Search Location" />
+        <item android:id="@+id/nav_deal"
+            android:icon="@android:drawable/ic_menu_today"
+            android:title="Deals &amp; Promotions" />
+    </group>
+
+    <item android:title="User Details">
+        <menu>
+            <item android:id="@+id/nav_user"
+                android:icon="@android:drawable/ic_menu_manage"
+                android:title="My Profile" />
+            <item android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_menu_delete"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

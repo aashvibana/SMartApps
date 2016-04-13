@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.easytech.smartstaffapp.DeliveryOrderDetailsActivity"
+    tools:showIn="@layout/activity_delivery_order_details">
+
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/do_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/do_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/do_list_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/do_id"
+                android:layout_width="fill_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Delivery Order Id"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/do_datetime"
+                android:layout_width="fill_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Delivery Order Date Time"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/do_path"
+                android:layout_width="fill_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Delivery Order Origin Destination"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/do_amt"
+                android:layout_width="fill_parent"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="Cages - Pallets"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/do_warehouseinfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:id="@+id/do_storeinfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:id="@+id/do_customerinfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

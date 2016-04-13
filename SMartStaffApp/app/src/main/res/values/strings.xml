@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">SMart Staff App</string>
+    <string name="google_app_id">307395188749</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_main">Welcome, Employee</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_employeeId">Employee Id</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_po">Purchase Order Id</string>
+    <string name="action_po_submit">Submit Purchase Order</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_employeeId">This Employee Id is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_purchase_order">Purchase Order</string>
+    <string name="purchase_order_id">Purchase Order Id</string>
+    <string name="delivery_order_id">Delivery Order Id</string>
+    <string name="pick_list_id">Picking List Id</string>
+    <string name="title_activity_barcode_scanner">Barcode Scanner</string>
+
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="barcode_header">Click &quot;Read Barcode&quot; to read a barcode</string>
+    <string name="read_barcode">Read Barcode</string>
+    <string name="read_qrcode">Scan QR Code</string>
+    <string name="auto_focus">Auto Focus</string>
+    <string name="use_flash">Use Flash</string>
+    <string name="barcode_success">Barcode read successfully</string>
+    <string name="barcode_failure">No barcode captured</string>
+    <string name="barcode_error">"Error reading barcode: %1$s"</string>
+
+    <string name="item_search">Search Item</string>
+
+    <string name="submit">Submit</string>
+    <string name="title_activity_delivery_order">Delivery Order</string>
+    <string name="title_activity_pick_list">Picking List</string>
+    <string name="title_activity_list_details">ListDetailsActivity</string>
+    <string name="title_activity_delivery_order_details">DeliveryOrderDetailsActivity</string>
+
+
+</resources>

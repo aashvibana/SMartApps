@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_purchaseorder"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Purchase Orders" />
+        <item
+            android:id="@+id/nav_picklist"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Pick List" />
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Search Item" />
+    </group>
+
+    <item
+        android:title="Transport">
+        <menu>
+            <item
+                android:id="@+id/nav_transport"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="Transport Schedule" />
+            <item
+                android:id="@+id/nav_delivery"
+                android:icon="@android:drawable/ic_menu_gallery"
+                android:title="Delivery Orders" />
+        </menu>
+    </item>
+
+    <item
+        android:title="Store Management">
+        <menu>
+            <item
+                android:id="@+id/nav_incoming"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="Incoming Orders" />
+            <item
+                android:id="@+id/nav_shelf"
+                android:icon="@android:drawable/ic_menu_gallery"
+                android:title="Alert Empty Shelf" />
+        </menu>
+    </item>
+
+    <item
+        android:title="Reporting">
+        <menu>
+            <item
+                android:id="@+id/nav_reporting"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="Generate Report" />
+        </menu>
+    </item>
+
+</menu>

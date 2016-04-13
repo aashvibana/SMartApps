@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="8dip">
+
+    <ImageView
+        android:id="@+id/item_img"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="8dip"
+        android:contentDescription="TODO"
+        android:src="@drawable/ic_user" />
+
+    <LinearLayout
+        android:id="@+id/item_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/item_img"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="32dip"
+            android:text="Example application"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="32dip"
+            android:text="$00.00" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@id/item_info"
+        android:src="@drawable/ic_delete_forever"
+        android:background="@android:color/transparent"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/delete"
+        android:textSize="24sp"
+        android:layout_marginLeft="8dp"
+        android:layout_alignBottom="@id/delete"
+        android:inputType="number"
+        android:id="@+id/editQty"/>
+
+</RelativeLayout>

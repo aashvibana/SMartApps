@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="8dip">
+
+    <ImageView
+        android:id="@+id/item_img"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="8dip"
+        android:contentDescription="TODO"
+        android:src="@drawable/loading" />
+
+    <LinearLayout
+        android:id="@+id/item_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/item_img"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="32dip"
+            android:text="Example application"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="32dip"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Description"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="32dip"
+        android:layout_alignBottom="@+id/item_info"
+        android:layout_alignParentEnd="true"
+        android:text="$00.00"
+        android:textSize="16sp" />
+
+</RelativeLayout>
