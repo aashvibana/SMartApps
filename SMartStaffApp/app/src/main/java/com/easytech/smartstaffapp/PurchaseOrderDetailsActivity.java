@@ -1,21 +1,30 @@
 package com.easytech.smartstaffapp;
 
+import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easytech.smartstaffapp.pojo.Employee;
+import com.easytech.smartstaffapp.pojo.Item;
 import com.easytech.smartstaffapp.pojo.PurchaseOrder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,6 +49,7 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
     private Employee employee;
 
     private PurchaseOrderDetailsTask mAuthTask = null;
+    private CreateGoodsReceipts mAuthTask1 = null;
 
     private TextView idView;
     private TextView titleView;
@@ -92,12 +102,19 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO update PO
 
-                //TODO create goods received
+                String acceptedItems = "";
+
+                for(Item item : purchaseOrder.getItems()){
+                    acceptedItems += item.getItemUpc() + "," + item.getQuantity() + "," + "12/12/2016" + "\\|";
+                }
+
+                mAuthTask1 = new CreateGoodsReceipts(getBaseContext(), employee.getEmpId(), employee.getWarehouseId(), purchaseOrder.getId(), acceptedItems);
+                mAuthTask1.execute((Void) null);
             }
         });
     }
@@ -126,7 +143,7 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
             try {
 
                 DefaultHttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(Constants.urlString + "MobilePuchaseOrder?empId=" + empId + "&poId=" + poId);
+                HttpGet httpGet = new HttpGet(Constants.urlString + "MobilePurchaseOrder?empId=" + empId + "&poId=" + poId);
 
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();
@@ -181,5 +198,76 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
             mAuthTask = null;
         }
     }
+
+    public class CreateGoodsReceipts extends AsyncTask<Void, Void, Boolean> {
+
+        private Context context;
+        private Long poId;
+        private Long empId;
+        private String output;
+        private Long warehouseId;
+        private String acceptedItems;
+
+        CreateGoodsReceipts(Context context, Long empId, Long warehouseId, Long poId, String acceptedItems) {
+            this.empId = empId;
+            this.poId = poId;
+            this.context = context;
+            this.acceptedItems = acceptedItems;
+            this.warehouseId = warehouseId;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileCreateGoodsReceipt?empId="
+                        + empId + "&poId=" + poId + "&acceptedItems=" + acceptedItems + "&warehouseId=" + warehouseId );
+
+                HttpResponse httpResponse = httpClient.execute(httpGet);
+                HttpEntity httpEntity = httpResponse.getEntity();
+                output = EntityUtils.toString(httpEntity);
+
+                //System.out.println(output);
+
+                if (output == null) {
+                    output = "Something went wrong, please try again!";
+                    return false;
+                }
+                else if (output.equalsIgnoreCase("OK")) {
+                    return true;
+                } else return false;
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                return false;
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+                return false;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mAuthTask1 = null;
+            if (success) {
+                finish();
+            } else {
+                Toast.makeText(context, output, Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask1 = null;
+        }
+    }
+
+
 }
 
