@@ -88,14 +88,15 @@
         </activity>
         <activity
             android:name=".ReportingActivity"
-            android:label="S-Mart Reports" >
+            android:label="S-Mart Reporting" >
         </activity>
         <activity
             android:name=".PurchaseOrderDetailsActivity"
             android:label="@string/title_activity_purchase_order_details"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".TransportScheduleActivity" >
+        <activity android:name=".TransportScheduleActivity"
+            android:label="Your Transport Schedule">
         </activity>
     </application>
 

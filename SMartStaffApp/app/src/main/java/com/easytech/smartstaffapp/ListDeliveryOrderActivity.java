@@ -60,6 +60,10 @@ public class ListDeliveryOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_delivery_order);
 
+        deliveryOrderList = (ListView) findViewById(R.id.delivery_order_list);
+        mSearchFormView = findViewById(R.id.do_search_form);
+        mProgressView = findViewById(R.id.do_search_progress);
+
         SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
         String customerJson = sharedpreferences.getString(Constants.Customer, null);
         if(customerJson == null) {
@@ -67,12 +71,14 @@ public class ListDeliveryOrderActivity extends AppCompatActivity {
         } else {
             Gson gson = new Gson();
             employee = gson.fromJson(customerJson, Employee.class);
+
+            if(employee.getWarehouseId() != null) {
+                showProgress(true);
+                mAuthTask = new DeliveryOrderTask(this, employee.getEmpId(), employee.getWarehouseId());
+                mAuthTask.execute((Void) null);
+            } else Toast.makeText(this, "You do not have the required access.", Toast.LENGTH_LONG).show();
+
         }
-
-        deliveryOrderList = (ListView) findViewById(R.id.delivery_order_list);
-
-        mSearchFormView = findViewById(R.id.search_form);
-        mProgressView = findViewById(R.id.search_progress);
     }
 
     private void goToLoginActivity() {
@@ -101,15 +107,15 @@ public class ListDeliveryOrderActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             try {
                 DefaultHttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileListDeliveryOrder?empId=" + empId + "&warehouseId=" + warehouseId + "" + false + "" + false);
+                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileListDeliveryOrder?empId=" + empId + "&warehouseId=" + warehouseId + "&canclled=" + false + "&delivered" + false);
 
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();
                 output = EntityUtils.toString(httpEntity);
 
-                //System.out.println(output);
+                System.out.println("DO o/p :" + output);
 
-                if (output == null) return false;
+                if (output == null || output.isEmpty()) return false;
                 else {
                     System.out.println("DO : " + output);
 
@@ -136,8 +142,9 @@ public class ListDeliveryOrderActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
+            showProgress(false);
             if (success) {
-                finish();
                 deliveryOrderList.setAdapter(new DeliveryOrderAdapter(deliveryOrder, getLayoutInflater()));
                 deliveryOrderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

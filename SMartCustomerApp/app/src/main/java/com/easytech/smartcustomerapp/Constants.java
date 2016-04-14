@@ -13,7 +13,7 @@ public class Constants {
 
     public static final String dateFormat = "dd/MM/yyyy";
 
-    private static final String ipAddress = "172.25.96.243";
+    private static final String ipAddress = "192.168.0.101";
     public static final String urlString = "http://" + ipAddress + ":8080/SMart-war/mobile/";
 
     /**

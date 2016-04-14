@@ -178,7 +178,7 @@ public class SearchItemActivity extends AppCompatActivity implements View.OnClic
                 HttpEntity httpEntity = httpResponse.getEntity();
                 output = EntityUtils.toString(httpEntity);
 
-                //System.out.println(output);
+//                System.out.println("Search Item : " + output);
 
                 if (output == null) return false;
                 else return true;

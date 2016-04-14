@@ -277,9 +277,12 @@ public class SignupActivity extends AppCompatActivity implements LoaderCallbacks
             // perform the user Signup attempt.
             showProgress(true);
 
-            String dob = day + "" + month + "" + year;
-            System.out.println("DOB :" + dob);
-            //System.out.println("SignupActivty 1" + email + password+ fname +lname+ postalCode+ homeAddress + contact+ gender+ race+ dob);
+            String dob = day + "/" + month + "/" + year;
+
+//            System.out.println("DOB :" + dob);
+
+//            System.out.println("SignupActivty 1" + email + password+ fname +lname+ postalCode+ homeAddress + contact+ gender+ race+ dob);
+
             mAuthTask = new UserSignupTask(this, email, password, fname ,lname, postalCode, homeAddress , contact, gender, race, dob);
             mAuthTask.execute((Void) null);
         }
@@ -470,11 +473,9 @@ public class SignupActivity extends AppCompatActivity implements LoaderCallbacks
 
                 //System.out.println("SignupActivity3" + output);
 
-                if (output != null && output.equalsIgnoreCase("OK")) {
-                    return true;
-                }
-                else
-                    return false;
+                if (output == null) return false;
+                else if (output.equalsIgnoreCase("OK")) return true;
+                else return false;
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

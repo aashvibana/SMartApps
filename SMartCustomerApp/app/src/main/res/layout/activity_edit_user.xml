@@ -135,12 +135,61 @@
                     android:singleLine="true" />
             </LinearLayout>
 
-            <EditText
-                android:drawableStart="@drawable/ic_calendar"
+            <TextView
+                android:layout_marginTop="4dip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/dob"
-                android:hint="Date of Birth (DD/MM/YYYY)"/>
+                android:text="Date of Birth (Day - Month - Year)"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="8"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/day"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:hint="DD" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+
+                <EditText
+
+                    android:id="@+id/month"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:hint="MM" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+
+                <EditText
+                    android:id="@+id/year"
+                    android:layout_width="0dp"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:hint="YYYY" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/email_sign_up_button"

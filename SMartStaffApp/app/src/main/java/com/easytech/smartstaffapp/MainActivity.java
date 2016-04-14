@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             goToSearchItemActivity();
         } else if (id == R.id.nav_transport) {
-
+            goToTransportSchedule();
         } else if (id == R.id.nav_delivery) {
             goToDeliveryOrderActivity();
         } else if (id == R.id.nav_shelf) {
@@ -198,6 +198,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void goToTransportSchedule() {
+        Intent intent = new Intent(this, TransportScheduleActivity.class);
+        startActivity(intent);
     }
 
     private void goToReportingActivity() {

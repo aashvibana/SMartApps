@@ -44,7 +44,11 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,7 +73,9 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
     private Spinner mRaceView;
     private EditText mHomeAddressView;
     private EditText mContactView;
-    private EditText mDobView;
+    private EditText mDateView;
+    private EditText mMonthView;
+    private EditText mYearView;
 
     private Customer customer;
     SharedPreferences sharedpreferences;
@@ -87,7 +93,9 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
         mPostalCodeView = (EditText) findViewById(R.id.postalcode);
         mHomeAddressView = (EditText) findViewById(R.id.address);
         mContactView = (EditText) findViewById(R.id.contact);
-        mDobView = (EditText) findViewById(R.id.dob);
+        mDateView = (EditText) findViewById(R.id.day);
+        mMonthView = (EditText) findViewById(R.id.month);
+        mYearView = (EditText) findViewById(R.id.year);
 
         sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
 
@@ -111,7 +119,7 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
             Gson gson = new Gson();
             customer = gson.fromJson(customerJson, Customer.class);
 
-            System.out.print(customer.toString());
+//            System.out.print(customer.toString());
 
             if (customer.getFname() != null)
                 mFnameView.setText(customer.getFname());
@@ -123,8 +131,9 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
                 mPostalCodeView.setText(customer.getPostalCode());
             if (customer.getContact() != null)
                 mContactView.setText(customer.getContact());
-            if (customer.getDob() != null)
-                mDobView.setText(customer.getDob().toString());
+            if (customer.getDob() != null) {
+
+            }
         }
 
         Button mEmailSignUpButton = (Button) findViewById(R.id.email_sign_up_button);
@@ -160,6 +169,9 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
         mPostalCodeView.setError(null);
         mHomeAddressView.setError(null);
         mContactView.setError(null);
+        mDateView.setError(null);
+        mMonthView.setError(null);
+        mYearView.setError(null);
 
         // Store values at the time of the Edit attempt.
         String fname = mFnameView.getText().toString();
@@ -169,7 +181,9 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
         String contact = mContactView.getText().toString();
         String gender = mGenderView.getSelectedItem().toString();
         String race = mRaceView.getSelectedItem().toString();
-        String dob = mDobView.getText().toString();
+        String day = mDateView.getText().toString();
+        String month = mMonthView.getText().toString();
+        String year = mYearView.getText().toString();
 
 
         boolean cancel = false;
@@ -195,9 +209,22 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
             mContactView.setError(getString(R.string.error_field_required));
             focusView = mContactView;
             cancel = true;
-        } else if (TextUtils.isEmpty(dob)) {
-            mDobView.setError(getString(R.string.error_field_required));
-            focusView = mDobView;
+        } else if (TextUtils.isEmpty(day)) {
+            mDateView.setError("");
+            focusView = mDateView;
+            cancel = true;
+        } else if (TextUtils.isEmpty(month)) {
+            mMonthView.setError("");
+            focusView = mMonthView;
+            cancel = true;
+        } else if (TextUtils.isEmpty(year)) {
+            mYearView.setError("");
+            focusView = mYearView;
+            cancel = true;
+        } else if (!isDateValid(day, month, year)) {
+            Toast.makeText(this, "Invalid Date", Toast.LENGTH_SHORT).show();
+            mDateView.setError("");
+            focusView = mDateView;
             cancel = true;
         }
 
@@ -212,6 +239,7 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
 
             //System.out.println("SignupActivty 1" + email + password+ fname +lname+ postalCode+ homeAddress + contact+ gender+ race+ dob);
 
+            String dob = day +"/"+ month +"/"+ year;
             customer.setDob(Long.parseLong(dob.replace("/", "")));
             customer.setContact(contact);
             customer.setAddress(homeAddress);
@@ -226,13 +254,26 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
             editor.clear();
             editor.commit();
             String json = gson.toJson(customer);
-            System.out.println("UserEditActivity : " + json);
+//            System.out.println("UserEditActivity : " + json);
             editor.putString(Constants.Customer, json);
             editor.putBoolean(Constants.loggedIn, true);
             editor.commit();
 
             mAuthTask = new UserEditTask(this, fname, lname, postalCode, homeAddress, contact, gender, race, dob);
             mAuthTask.execute((Void) null);
+        }
+    }
+
+    private boolean isDateValid(String day, String month, String year) {
+        //System.out.println("DMY :" + day + "" + month + "" + year);
+        final String DATE_FORMAT = "ddMMyyyy";
+        try {
+            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+            df.setLenient(false);
+            df.parse(day+month+year);
+            return true;
+        } catch (ParseException e) {
+            return false;
         }
     }
 
@@ -329,6 +370,7 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
         private String gender;
         private String race;
         private String dob;
+        private String output;
 
         UserEditTask(Context context, String fname, String lname, String postalCode, String homeAddress, String contact, String gender, String race, String dob) {
             this.context = context;
@@ -344,8 +386,6 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
 
         @Override
         protected Boolean doInBackground(Void... params) {
-
-            String output;
             try {
 
                 HttpClient httpClient = new DefaultHttpClient();
@@ -361,8 +401,9 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
                         "&fname=" + fname +
                         "&lname=" + lname, "UTF-8"));
 */
-                HttpPost httpPost = new HttpPost(Constants.urlString + "EditCustomerProfile");
+                HttpPost httpPost = new HttpPost(Constants.urlString + "MobileEditCustomerProfile");
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("id", customer.getCustId().toString()));
                 nameValuePairs.add(new BasicNameValuePair("email", customer.getEmail()));
                 nameValuePairs.add(new BasicNameValuePair("race", race));
                 nameValuePairs.add(new BasicNameValuePair("dob", dob));
@@ -379,11 +420,13 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
                 HttpEntity httpEntity = httpResponse.getEntity();
                 output = EntityUtils.toString(httpEntity);
 
-                System.out.println(output);
+//                System.out.println(output);
 
-                if (output != null) {
-                    return true;
-                } else return false;
+                if (output == null) {
+                    output = "Something went wrong! Please try again";
+                    return false;
+                } else if(output.equalsIgnoreCase("OK")) return true;
+                else return false;
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -406,7 +449,7 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
                 finish();
                 goToUserProfileActivity();
             } else {
-                Toast.makeText(context, "Something went wrong! Please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, output, Toast.LENGTH_SHORT).show();
             }
         }
 

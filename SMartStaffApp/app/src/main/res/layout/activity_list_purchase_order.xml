@@ -10,7 +10,7 @@
     tools:context="com.easytech.smartstaffapp.ListPurchaseOrderActivity">
 
     <ProgressBar
-        android:id="@+id/search_progress"
+        android:id="@+id/po_search_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:visibility="gone" />
 
     <ScrollView
-        android:id="@+id/search_form"
+        android:id="@+id/po_search_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

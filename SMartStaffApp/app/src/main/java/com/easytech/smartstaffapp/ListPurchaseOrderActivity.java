@@ -55,6 +55,11 @@ public class ListPurchaseOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_purchase_order);
 
+        purchaseOrderList = (ListView) findViewById(R.id.purchase_order_list);
+
+        mSearchFormView = findViewById(R.id.po_search_form);
+        mProgressView = findViewById(R.id.po_search_progress);
+
         SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
         String customerJson = sharedpreferences.getString(Constants.Customer, null);
         if(customerJson == null) {
@@ -62,14 +67,10 @@ public class ListPurchaseOrderActivity extends AppCompatActivity {
         } else {
             Gson gson = new Gson();
             employee = gson.fromJson(customerJson, Employee.class);
+            showProgress(true);
             mAuthTask = new PurchaseOrderTask(this, employee.getEmpId());
             mAuthTask.execute((Void) null);
         }
-
-        purchaseOrderList = (ListView) findViewById(R.id.purchase_order_list);
-
-        mSearchFormView = findViewById(R.id.search_form);
-        mProgressView = findViewById(R.id.search_progress);
     }
 
     private void goToLoginActivity() {

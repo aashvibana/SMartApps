@@ -26,7 +26,7 @@
                 android:title="Transport Schedule" />
             <item
                 android:id="@+id/nav_delivery"
-                android:icon="@android:drawable/ic_menu_gallery"
+                android:icon="@drawable/ic_address"
                 android:title="Delivery Orders" />
 
             <item
@@ -41,7 +41,7 @@
         <menu>
             <item
                 android:id="@+id/nav_reporting"
-                android:icon="@android:drawable/ic_menu_share"
+                android:icon="@drawable/ic_drawer"
                 android:title="Generate Report" />
         </menu>
     </item>

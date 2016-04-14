@@ -82,9 +82,8 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
 
         idView.setText(purchaseOrder.getId().toString());
         titleView.setText(purchaseOrder.getTitle());
-        Date date = new Date(purchaseOrder.getApprovalDate());
         SimpleDateFormat df2 = new SimpleDateFormat(Constants.dateFormat);
-        approvalView.setText(df2.format(date));
+        approvalView.setText(df2.format(purchaseOrder.getApprovalDate()));
 
 
         SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
@@ -96,7 +95,6 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
             employee = gson.fromJson(customerJson, Employee.class);
 
             //System.out.println("Employee : " + employee.toString());
-
             mAuthTask = new PurchaseOrderDetailsTask(this, employee.getEmpId(), purchaseOrder.getId());
             mAuthTask.execute((Void) null);
         }
@@ -180,11 +178,9 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
                 approverView.setText(po.getApprover());
                 descView.setText(po.getDesc());
                 amtView.setText(String.format("$%.2f", po.getAmount()));
-                Date date = new Date(po.getNextRunDate());
                 SimpleDateFormat df2 = new SimpleDateFormat(Constants.dateFormat);
-                nextView.setText(df2.format(date));
-                Date date2 = new Date(po.getDeliveryDate());
-                deliveryView.setText(df2.format(date2));
+                nextView.setText(df2.format(po.getNextRunDate()));
+                deliveryView.setText(df2.format(po.getDeliveryDate()));
 
                 itemsView.setAdapter(new poItemsAdapter(po.getItems(), getLayoutInflater()));
 

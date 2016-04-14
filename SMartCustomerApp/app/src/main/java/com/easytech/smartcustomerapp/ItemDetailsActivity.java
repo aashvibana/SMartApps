@@ -118,9 +118,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Item : " + item.toString());
-                System.out.println("Qty : " + shoppingCart.getItemQty(item) + 1);
-                shoppingCart.updateItem(item, shoppingCart.getItemQty(item) + 1);
+//                System.out.println("Item : " + item.toString());
+//                System.out.println("Qty : " + (shoppingCart.getItemQty(item) + 1));
+                shoppingCart.updateItem(item, (shoppingCart.getItemQty(item) + 1));
                 Toast.makeText(ItemDetailsActivity.this, "Item added to Cart!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -141,6 +141,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
     public class LocationTask extends AsyncTask<Void, Void, Boolean> {
 
         private Context context;
+        private String print = "";
 
         LocationTask(Context context) {
             this.context = context;
@@ -163,10 +164,11 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
                 if (output == null) return false;
                 else {
-                    System.out.println("Location" + output);
+//                    System.out.println("Location" + output);
                     Gson gson = new GsonBuilder().serializeNulls().create();
                     location = gson.fromJson(output, new TypeToken<List<Location>>() {
                     }.getType());
+                    if(location != null) for(Location loc : location) print += loc.getShelfName() + " ";
                     return true;
                 }
             } catch (UnsupportedEncodingException e) {
@@ -187,8 +189,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             if (success) {
-                String print = "";
-                for(Location loc : location) print += loc.getShelfName() + " ";
                 locationView.setText(print);
             } else {
                Toast.makeText(context, "Location not available.", Toast.LENGTH_LONG).show();

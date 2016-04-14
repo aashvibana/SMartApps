@@ -147,7 +147,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
                 //System.out.println(output);
 
-                if (output == null) return false;
+                if (output == null || output.isEmpty()) return false;
                 else return true;
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

@@ -82,11 +82,10 @@ public class DeliveryOrderDetailsActivity extends AppCompatActivity {
             idView.setText(deliveryOrder.getId().toString());
             pathView.setText(deliveryOrder.getOrigin() + " - " +deliveryOrder.getDestination());
 
-            Date date = new Date(deliveryOrder.getDeliveryDate());
             SimpleDateFormat df2 = new SimpleDateFormat(Constants.dateFormat);
 
-            if (deliveryOrder.getDeliveryTimeSlot() != null) dateTimeView.setText(df2.format(date) + ", " + deliveryOrder.getDeliveryTimeSlot().getTimeSlotNum());
-            else dateTimeView.setText(df2.format(date));
+            if (deliveryOrder.getDeliveryTimeSlot() != null) dateTimeView.setText(df2.format(deliveryOrder.getDeliveryDate()) + ", " + deliveryOrder.getDeliveryTimeSlot().getTimeSlotNum());
+            else dateTimeView.setText(df2.format(deliveryOrder.getDeliveryDate()));
 
             if (deliveryOrder.getType().equalsIgnoreCase("warehouseTostore")) {
                 amtView.setText("Cages - " + deliveryOrder.getTotalCages() + "; Pallets - "+deliveryOrder.getTotalPallets());

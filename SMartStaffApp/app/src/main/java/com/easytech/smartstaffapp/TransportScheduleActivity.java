@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.easytech.smartstaffapp.pojo.DeliveryOrder;
 import com.easytech.smartstaffapp.pojo.DeliverySchedule;
+import com.easytech.smartstaffapp.pojo.Employee;
 import com.easytech.smartstaffapp.pojo.TimeSlot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,6 +46,7 @@ public class TransportScheduleActivity extends AppCompatActivity {
     private ScheduleTask mAuthTask = null;
 
     private List<DeliverySchedule> deliveryScheduleList;
+    private Employee employee;
 
 
     @Override
@@ -55,6 +58,27 @@ public class TransportScheduleActivity extends AppCompatActivity {
 
         mSearchFormView = findViewById(R.id.search_form);
         mProgressView = findViewById(R.id.search_progress);
+
+        SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        String customerJson = sharedpreferences.getString(Constants.Customer, null);
+        if(customerJson == null) {
+            goToLoginActivity();
+        } else {
+            Gson gson = new Gson();
+            employee = gson.fromJson(customerJson, Employee.class);
+
+            if (employee.getVehiclePlateNum() != null) {
+                showProgress(true);
+                mAuthTask = new ScheduleTask(this, employee.getEmpId(), employee.getVehiclePlateNum());
+                mAuthTask.execute((Void) null);
+            }
+            else Toast.makeText(this, "You are not authorized to perform this function", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void goToLoginActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -115,14 +139,11 @@ public class TransportScheduleActivity extends AppCompatActivity {
                 String format = "";
                 int count_ds = 0;
                 for(DeliverySchedule deliverySchedule : deliveryScheduleList) {
-                    Date date = new Date(deliverySchedule.getDeliveryDate());
                     SimpleDateFormat sdf = new SimpleDateFormat(Constants.dateFormat);
-                    format += ++count_ds + " " + deliverySchedule.getId() + " : " + sdf.format(date) + "\n";
+                    format += ++count_ds + " " + deliverySchedule.getId() + " : " + sdf.format(deliverySchedule.getDeliveryDate()) + "\n";
                     int count_ts = 0;
                     for(TimeSlot timeSlot : deliverySchedule.getTimeSlots()) {
-                        Date date1 = new Date(timeSlot.getTimeSlotNum());
-                        SimpleDateFormat sdf1 = new SimpleDateFormat(Constants.dateFormat);
-                        format += count_ds + "." + ++count_ts + " " + timeSlot.getId() + " : " + sdf1.format(date1) + "\n";
+                        format += count_ds + "." + ++count_ts + " " + timeSlot.getId() + " : " + timeSlot.getTimeSlotNum() + "\n";
                         int count_do = 0;
                         for(DeliveryOrder deliveryOrder : timeSlot.getDeliveryOrders()) {
                             format += count_ds + "." + count_ts + "." + ++count_do + " " + deliveryOrder.getId() + " : " + deliveryOrder.getOrigin() + " - " + deliveryOrder.getDestination() + "\n";

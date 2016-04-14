@@ -100,41 +100,26 @@ public class PickListActivity extends AppCompatActivity implements View.OnClickL
             startActivityForResult(intent, Constants.RC_BARCODE_CAPTURE);
         }
 
-        if(v.getId() == R.id.submit_qrcode) {
+        if (v.getId() == R.id.submit_qrcode) {
             String code = qrCodeInput.getText().toString();
 
             View focusView = null;
             boolean cancel = false;
 
-            // Check for a valid code.
-            if (TextUtils.isEmpty(code)) {
-                qrCodeInput.setError(getString(R.string.error_field_required));
-                focusView = qrCodeInput;
-                cancel = true;
-            }
 
-            if (cancel) {
-                // There was an error; don't attempt login and focus the first
-                // form field with an error.
-                focusView.requestFocus();
+            SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+            String customerJson = sharedpreferences.getString(Constants.Customer, null);
+            if (customerJson == null) {
+                goToLoginActivity();
             } else {
-                // Show a progress spinner, and kick off a background task to
-                // perform the user login attempt.
-
-                SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
-                String customerJson = sharedpreferences.getString(Constants.Customer, null);
-                if(customerJson == null) {
-                    goToLoginActivity();
-                } else {
-                    Gson gson = new Gson();
-                    employee = gson.fromJson(customerJson, Employee.class);
-                    if(employee.getWarehouseId() != null) {
-                        showProgress(true);
-                        mAuthTask = new PickListTask(this, code, employee.getEmpId(), employee.getWarehouseId());
-                        mAuthTask.execute((Void) null);
-                    } else
-                        Toast.makeText(this, "You do not have the required access.", Toast.LENGTH_LONG).show();
-                }
+                Gson gson = new Gson();
+                employee = gson.fromJson(customerJson, Employee.class);
+                if (employee.getWarehouseId() != null) {
+                    showProgress(true);
+                    mAuthTask = new PickListTask(this, code, employee.getEmpId(), employee.getWarehouseId());
+                    mAuthTask.execute((Void) null);
+                } else
+                    Toast.makeText(this, "You do not have the required access.", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -161,8 +146,7 @@ public class PickListActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(PickListActivity.this, String.format(getString(R.string.barcode_error), CommonStatusCodes.getStatusCodeString(resultCode)), Toast.LENGTH_SHORT).show();
                 Log.d(TAG, String.format(getString(R.string.barcode_error), CommonStatusCodes.getStatusCodeString(resultCode)));
             }
-        }
-        else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -232,10 +216,10 @@ public class PickListActivity extends AppCompatActivity implements View.OnClickL
                 HttpEntity httpEntity = httpResponse.getEntity();
                 output = EntityUtils.toString(httpEntity);
 
-                //System.out.println(output);
+                System.out.println("output picklist" + output);
 
-                if (output == null) return false;
-                else  return true;
+                if (output == null || output.isEmpty()) return false;
+                else return true;
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
                 return false;
@@ -260,7 +244,7 @@ public class PickListActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 goToListPickListActivity();
             } else {
-                Toast.makeText(context, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No picklists match your search. Please try again.", Toast.LENGTH_SHORT).show();
             }
         }
 

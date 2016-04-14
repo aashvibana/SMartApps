@@ -1,9 +1,12 @@
 package com.easytech.smartcustomerapp;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,8 @@ public class DealsListActivity extends AppCompatActivity implements NavigationVi
 
     private ListView listView;
 
+    private static int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,27 +44,48 @@ public class DealsListActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void initializeDealList() {
-        dealList = new ArrayList<>();
-        Deal deal = new Deal();
-        deal.setId(Long.parseLong("1"));
-        deal.setDealType("Discount");
-        deal.setName("April Bonanza");
-        deal.setDesc("Get 10% off all purchases for the month of April");
-        deal.setImgLocation("http://d30y9cdsu7xlg0.cloudfront.net/png/10992-200.png");
-        deal.setPercent(10);
-        deal.setStartDate("01/04/2016");
-        deal.setEndDate("30/04/2016");
-        dealList.add(deal);
-        Deal deal1 = new Deal();
-        deal1.setId(Long.parseLong("1"));
-        deal1.setDealType("Package");
-        deal1.setName("Buy 1 get 1 free");
-        deal1.setDesc("Get a free Head & Shoulders Shampoo when you purchase Head & Shoulders Shampoo!");
-        deal1.setImgLocation("http://www.jabongsale.com/wp-content/uploads/2013/06/buy-1-300x265.png");
-        deal1.setPercent(50);
-        deal1.setStartDate("05/04/2016");
-        deal1.setEndDate("05/05/2016");
-        dealList.add(deal1);
+        if(dealList == null) {
+            dealList = new ArrayList<>();
+            Deal deal = new Deal();
+            deal.setId(Long.parseLong("1"));
+            deal.setDealType("Discount");
+            deal.setName("April Bonanza");
+            deal.setDesc("Get 10% off all purchases for the month of April");
+            deal.setImgLocation("http://d30y9cdsu7xlg0.cloudfront.net/png/10992-200.png");
+            deal.setPercent(10);
+            deal.setStartDate("01/04/2016");
+            deal.setEndDate("30/04/2016");
+
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(this)
+                            .setSmallIcon(R.drawable.ic_offer)
+                            .setContentTitle(deal.getName())
+                            .setContentText(deal.getDesc());
+
+            Intent resultIntent = new Intent(this, DealsListActivity.class);
+            // Because clicking the notification opens a new ("special") activity, there's
+            // no need to create an artificial back stack.
+            PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(resultPendingIntent);
+            // Sets an ID for the notification
+            int mNotificationId = ++count;
+            // Gets an instance of the NotificationManager service
+            NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            // Builds the notification and issues it.
+            mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+            dealList.add(deal);
+            Deal deal1 = new Deal();
+            deal1.setId(Long.parseLong("1"));
+            deal1.setDealType("Package");
+            deal1.setName("Buy 1 get 1 free");
+            deal1.setDesc("Get a free Head & Shoulders Shampoo when you purchase Head & Shoulders Shampoo!");
+            deal1.setImgLocation("http://www.jabongsale.com/wp-content/uploads/2013/06/buy-1-300x265.png");
+            deal1.setPercent(50);
+            deal1.setStartDate("05/04/2016");
+            deal1.setEndDate("05/05/2016");
+            dealList.add(deal1);
+        }
     }
 
     @Override

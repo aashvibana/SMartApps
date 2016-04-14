@@ -27,15 +27,15 @@ public class ListPickListActivity extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.picklistview);
 
-        jsonString = getIntent().getStringExtra(Constants.itemList);
+        jsonString = getIntent().getStringExtra(Constants.pickList);
 
-        //System.out.println(jsonString);
+        System.out.println("Picklist" + jsonString);
 
         Gson gson = new Gson();
         mPickList = gson.fromJson(jsonString, new TypeToken<List<PickingList>>() {
         }.getType());
 
-        if(mPickList.isEmpty()) Toast.makeText(this, "No Items match your search word", Toast.LENGTH_LONG).show();
+        if(mPickList== null || mPickList.isEmpty()) Toast.makeText(this, "No Items match your search word", Toast.LENGTH_LONG).show();
 
         else if (mPickList.size() == 1) goToPickListDetailsActivity();
 

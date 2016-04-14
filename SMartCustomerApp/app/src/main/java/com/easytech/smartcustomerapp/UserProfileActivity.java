@@ -20,6 +20,9 @@ import android.widget.TextView;
 import com.easytech.smartcustomerapp.pojo.Customer;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class UserProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static Toolbar toolbar;
@@ -62,7 +65,7 @@ public class UserProfileActivity extends AppCompatActivity implements Navigation
         SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
         String customerJson = sharedpreferences.getString(Constants.Customer, null);
 
-        System.out.println("Userprofile: " + customerJson);
+//        System.out.println("Userprofile: " + customerJson);
 
         if (customerJson == null) {
             goToLoginActivity();
@@ -84,8 +87,14 @@ public class UserProfileActivity extends AppCompatActivity implements Navigation
                 mHomeAddressView.setText(customer.getAddress() + ", " + customer.getPostalCode());
             if (customer.getContact() != null)
                 mContactView.setText(customer.getContact());
-            if (customer.getDob() != null)
-                mDobView.setText(customer.getDob().toString());
+            if (customer.getDob() != null) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat(Constants.dateFormat);
+                    mDobView.setText(sdf.format(customer.getDob().toString()));
+                } catch (Exception e) {
+                    mDobView.setText(customer.getDob().toString());
+                }
+            }
             if (customer.getMembershipId() != 0)
                 mMembershipView.setText(customer.getMembershipId().toString());
             mPointsView.setText(customer.getLoyaltyPoints().toString());

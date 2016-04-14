@@ -29,7 +29,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         jsonString = getIntent().getStringExtra(Constants.itemList);
 
-        System.out.println(jsonString);
+//        System.out.println(jsonString);
 
         Gson gson = new Gson();
         mItemList = gson.fromJson(jsonString, new TypeToken<List<Item>>() {

@@ -61,9 +61,8 @@ public class PurchaseOrderAdapter extends BaseAdapter {
 
         purchaseOrder.PurchaseOrderId.setText(String.valueOf(curPO.getId()));
         purchaseOrder.PurchaseOrderTitle.setText(curPO.getTitle());
-        Date date = new Date(curPO.getApprovalDate());
         SimpleDateFormat sdf = new SimpleDateFormat(Constants.dateFormat);
-        purchaseOrder.PurchaseOrderApprovalDate.setText(sdf.format(date));
+        purchaseOrder.PurchaseOrderApprovalDate.setText(sdf.format(curPO.getApprovalDate()));
         purchaseOrder.PurchaseOrderType.setText(curPO.getType());
 
         return convertView;
