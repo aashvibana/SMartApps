@@ -132,6 +132,8 @@ public class ListPurchaseOrderActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
+            showProgress(false);
             if (success) {
                 if(purchaseOrder.isEmpty()) Toast.makeText(getBaseContext(), "No Purchase Orders", Toast.LENGTH_SHORT).show();
                 else if(purchaseOrder.size() == 1) goToPurchaseOrderDetailsActivity();

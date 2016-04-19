@@ -422,7 +422,7 @@ public class EditUserActivity extends AppCompatActivity implements LoaderCallbac
 
 //                System.out.println(output);
 
-                if (output == null) {
+                if (output == null || output.isEmpty()) {
                     output = "Something went wrong! Please try again";
                     return false;
                 } else if(output.equalsIgnoreCase("OK")) return true;

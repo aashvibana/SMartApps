@@ -13,9 +13,9 @@ public class PickingList implements Serializable {
     private Long deliveryOrderId;
     private ArrayList<Item> items = new ArrayList();
     private String loadingBay;
-    private Long pickingTime;
-    private Long dateCreated;
-    private Long dateTimePicked;
+    private String pickingTime;
+    private String dateCreated;
+    private String dateTimePicked;
 
     public Long getId() {
         return id;
@@ -57,27 +57,27 @@ public class PickingList implements Serializable {
         this.loadingBay = loadingBay;
     }
 
-    public Long getPickingTime() {
+    public String getPickingTime() {
         return pickingTime;
     }
 
-    public void setPickingTime(Long pickingTime) {
+    public void setPickingTime(String pickingTime) {
         this.pickingTime = pickingTime;
     }
 
-    public Long getDateCreated() {
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Long dateCreated) {
+    public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Long getDateTimePicked() {
+    public String getDateTimePicked() {
         return dateTimePicked;
     }
 
-    public void setDateTimePicked(Long dateTimePicked) {
+    public void setDateTimePicked(String dateTimePicked) {
         this.dateTimePicked = dateTimePicked;
     }
 }

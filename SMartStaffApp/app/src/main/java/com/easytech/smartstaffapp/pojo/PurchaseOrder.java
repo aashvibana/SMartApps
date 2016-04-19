@@ -13,15 +13,15 @@ public class PurchaseOrder implements Serializable {
     private Long id;
     private String title;
     private String type;
-    private long approvalDate;
+    private String approvalDate;
 
     private String supplierName;
     private String approver;
     private String desc;
     private double amount;
 
-    private long nextRunDate;
-    private long deliveryDate;
+    private String nextRunDate;
+    private String deliveryDate;
 
     private List<Item> items;
 
@@ -31,14 +31,6 @@ public class PurchaseOrder implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public long getApprovalDate() {
-        return approvalDate;
-    }
-
-    public void setApprovalDate(long approvalDate) {
-        this.approvalDate = approvalDate;
     }
 
     public String getTitle() {
@@ -89,19 +81,27 @@ public class PurchaseOrder implements Serializable {
         this.amount = amount;
     }
 
-    public long getNextRunDate() {
+    public String getApprovalDate() {
+        return approvalDate;
+    }
+
+    public void setApprovalDate(String approvalDate) {
+        this.approvalDate = approvalDate;
+    }
+
+    public String getNextRunDate() {
         return nextRunDate;
     }
 
-    public void setNextRunDate(long nextRunDate) {
+    public void setNextRunDate(String nextRunDate) {
         this.nextRunDate = nextRunDate;
     }
 
-    public long getDeliveryDate() {
+    public String getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(long deliveryDate) {
+    public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 

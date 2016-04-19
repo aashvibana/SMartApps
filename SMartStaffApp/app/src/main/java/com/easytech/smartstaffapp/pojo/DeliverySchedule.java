@@ -9,7 +9,7 @@ import java.util.List;
 public class DeliverySchedule {
 
     private Long id;
-    private Long deliveryDate;
+    private String deliveryDate;
 
     private List<TimeSlot> timeSlots;
 
@@ -21,11 +21,11 @@ public class DeliverySchedule {
         this.id = id;
     }
 
-    public Long getDeliveryDate() {
+    public String getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Long deliveryDate) {
+    public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 

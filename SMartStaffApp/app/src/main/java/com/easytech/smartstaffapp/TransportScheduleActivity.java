@@ -72,7 +72,7 @@ public class TransportScheduleActivity extends AppCompatActivity {
                 mAuthTask = new ScheduleTask(this, employee.getEmpId(), employee.getVehiclePlateNum());
                 mAuthTask.execute((Void) null);
             }
-            else Toast.makeText(this, "You are not authorized to perform this function", Toast.LENGTH_LONG).show();
+            else Toast.makeText(this, "You do not have the required access.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -102,7 +102,7 @@ public class TransportScheduleActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             try {
                 DefaultHttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileVehicleSchedule?empId=" + empId + "&vehiclePlateNum=" + vehiclePlateNum);
+                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileVehicleSchedule?empId=" + empId + "&f=" + vehiclePlateNum);
 
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();
@@ -135,18 +135,22 @@ public class TransportScheduleActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
+            showProgress(false);
             if (success) {
                 String format = "";
                 int count_ds = 0;
+
                 for(DeliverySchedule deliverySchedule : deliveryScheduleList) {
-                    SimpleDateFormat sdf = new SimpleDateFormat(Constants.dateFormat);
-                    format += ++count_ds + " " + deliverySchedule.getId() + " : " + sdf.format(deliverySchedule.getDeliveryDate()) + "\n";
+                    format += ++count_ds + " " + deliverySchedule.getId() + " : " + deliverySchedule.getDeliveryDate() + "\n";
                     int count_ts = 0;
                     for(TimeSlot timeSlot : deliverySchedule.getTimeSlots()) {
                         format += count_ds + "." + ++count_ts + " " + timeSlot.getId() + " : " + timeSlot.getTimeSlotNum() + "\n";
                         int count_do = 0;
-                        for(DeliveryOrder deliveryOrder : timeSlot.getDeliveryOrders()) {
-                            format += count_ds + "." + count_ts + "." + ++count_do + " " + deliveryOrder.getId() + " : " + deliveryOrder.getOrigin() + " - " + deliveryOrder.getDestination() + "\n";
+                        if(timeSlot.getDeliveryOrders() != null) {
+                            for (DeliveryOrder deliveryOrder : timeSlot.getDeliveryOrders()) {
+                                format += count_ds + "." + count_ts + "." + ++count_do + " " + deliveryOrder.getId() + " : " + deliveryOrder.getOrigin() + " - " + deliveryOrder.getDestination() + "\n";
+                            }
                         }
                     }
                 }

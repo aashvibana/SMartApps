@@ -264,6 +264,5 @@ public class PurchaseOrderDetailsActivity extends AppCompatActivity {
         }
     }
 
-
 }
 

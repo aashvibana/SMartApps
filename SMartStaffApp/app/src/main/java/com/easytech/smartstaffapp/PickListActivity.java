@@ -210,7 +210,7 @@ public class PickListActivity extends AppCompatActivity implements View.OnClickL
         protected Boolean doInBackground(Void... params) {
             try {
                 DefaultHttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(Constants.urlString + "ListPickList?empId=" + empId + "&warehouseId=" + warehouseId);
+                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileListPickList?empId=" + empId + "&warehouseId=" + warehouseId);
 
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();
@@ -218,7 +218,7 @@ public class PickListActivity extends AppCompatActivity implements View.OnClickL
 
                 System.out.println("output picklist" + output);
 
-                if (output == null || output.isEmpty()) return false;
+                if (output == null || output.isEmpty() || output.equalsIgnoreCase("You are not authorized to perform this function")) return false;
                 else return true;
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

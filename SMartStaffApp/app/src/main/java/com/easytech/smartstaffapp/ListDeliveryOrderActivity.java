@@ -107,7 +107,7 @@ public class ListDeliveryOrderActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             try {
                 DefaultHttpClient httpClient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileListDeliveryOrder?empId=" + empId + "&warehouseId=" + warehouseId + "&canclled=" + false + "&delivered" + false);
+                HttpGet httpGet = new HttpGet(Constants.urlString + "MobileListDeliveryOrder?empId=" + empId + "&warehouseId=" + warehouseId + "&cancelled=" + false + "&delivered" + false);
 
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();

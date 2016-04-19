@@ -11,7 +11,7 @@ public class DeliveryOrder implements Serializable{
     private Long warehouseId;
     private String origin;
     private String destination;
-    private Long deliveryDate;
+    private String deliveryDate;
 
     private TimeSlot deliveryTimeSlot;
 
@@ -56,11 +56,11 @@ public class DeliveryOrder implements Serializable{
         this.destination = destination;
     }
 
-    public Long getDeliveryDate() {
+    public String getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Long deliveryDate) {
+    public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 

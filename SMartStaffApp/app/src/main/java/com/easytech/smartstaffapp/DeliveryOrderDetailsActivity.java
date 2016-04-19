@@ -70,6 +70,9 @@ public class DeliveryOrderDetailsActivity extends AppCompatActivity {
         dateTimeView = (TextView) findViewById(R.id.do_datetime);
         pathView = (TextView) findViewById(R.id.do_path);
 
+        mSearchFormView = findViewById(R.id.do_form);
+        mProgressView = findViewById(R.id.do_progress);
+
         deliveryOrder = (DeliveryOrder) getIntent().getSerializableExtra(Constants.delivery);
         SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
         String customerJson = sharedpreferences.getString(Constants.Customer, null);
@@ -116,8 +119,6 @@ public class DeliveryOrderDetailsActivity extends AppCompatActivity {
                 }
             });
         }
-        mSearchFormView = findViewById(R.id.do_form);
-        mProgressView = findViewById(R.id.do_progress);
     }
 
     private void goToLoginActivity() {
@@ -175,6 +176,7 @@ public class DeliveryOrderDetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
             showProgress(false);
             if (success) {
                 finish();
